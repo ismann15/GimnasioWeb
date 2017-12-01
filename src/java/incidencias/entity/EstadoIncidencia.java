@@ -6,7 +6,7 @@
 package incidencias.entity;
 
 /**
- * Clase que gestiona los posibles estados  que una {@link incidencias.entity.Incidencia} puede estar
+ * Clase que gestiona los posibles estados  que una {@link incidencias.entity.Incidencia} puede estar.
  * @author isma
  */
 public enum EstadoIncidencia {
