@@ -11,6 +11,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  * Clase que gestiona las posibles incidencias que una
@@ -29,6 +32,24 @@ import javax.persistence.Id;
  * @author isma
  */
 @Entity
+@Table(name="",schema="")
+@NamedQueries({
+    @NamedQuery(
+           name="findAllIncidencias",
+           query="SELECT i FROM Incidencia i ORDER BY i.fechaAlta"),
+    @NamedQuery(
+            name="findIncidenciaById",
+            query="SELECT i FROM Inciencia i WHERE i.id= :id"),
+    @NamedQuery(
+            name="findIncidenciaByEstado",
+            query="SELECT i FROM Inciencia i WHERE i.estado= :estado"),
+    @NamedQuery(
+            name="findIncidenciaByFechaAlta",
+            query="SELECT i FROM Inciencia i WHERE i.fechaAlta= :fachaAlta"),
+    @NamedQuery(
+            name="findIncidenciaByMaquina",
+            query="SELECT i FROM Inciencia i WHERE i.maquina= :maquina"),
+})
 public class Incidencia implements Serializable {
 
     private static final long serialVersionUID = 1L;

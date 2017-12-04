@@ -11,7 +11,7 @@ package incidencias.entity;
  */
 public enum EstadoIncidencia {
     /**
-     * incidencia resuleta
+     * incidencia resuleta 
      */
     Resuelta,
     /**
