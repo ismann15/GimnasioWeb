@@ -10,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
 /**
  * Clase que gestiona los modelos que puede tener un objeto {@link incidencias.entity.Maquina}
@@ -23,6 +26,15 @@ import javax.persistence.Id;
  * @author isma
  */
 @Entity
+@Table(name="",schema="")
+@NamedQueries({
+    @NamedQuery(
+           name="findAllModelos",
+           query="SELECT m FROM Modelo m ORDER BY m.id"),
+    @NamedQuery(
+            name="findModeloById",
+            query="SELECT m FROM Modelo m  WHERE m.id= :id")
+})
 public class Modelo implements Serializable {
 
     private static final long serialVersionUID = 1L;
