@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 
 /**
  * Clase que gestiona maquinas, estos son sus atributos
@@ -29,6 +31,16 @@ import javax.persistence.Id;
  * @author isma
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(
+            name="findAllMaquinas",
+            query="SELECT m FROM Maquina m ORDER BY m.id"
+    ),
+    @NamedQuery(
+            name="findMaquinasByID",
+            query="SELECT m FROM Maquina m WHERE m.id = :id"
+    )
+})
 public class Maquina implements Serializable {
 
     private static final long serialVersionUID = 1L;
