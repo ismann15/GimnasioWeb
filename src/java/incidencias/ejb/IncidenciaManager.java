@@ -17,7 +17,10 @@ import incidencias.exceptions.NoMaquinasException;
 import incidencias.exceptions.QueryException;
 import incidencias.exceptions.UpdateException;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -25,6 +28,13 @@ import javax.ejb.Stateless;
  */
 @Stateless
 public class IncidenciaManager implements IncidenciaLocalManager{
+    
+    @PersistenceContext
+    private EntityManager em;
+    /**
+     * Logger for the class
+     */
+    private static final Logger log= Logger.getLogger("incidencias.ejb.IncidenciaManager");
 
     @Override
     public List<Incidencia> getAllIncidencias() throws NoIncidenciasException, QueryException {
@@ -63,7 +73,19 @@ public class IncidenciaManager implements IncidenciaLocalManager{
 
     @Override
     public void añadirIncidencia(Incidencia incidencia) throws InsertException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        log.severe("IncidencaManager:añadirIncidencia creando la incidencia");
+        if(incidencia.getId()==null||incidencia.getEstado()==null||
+                incidencia.getEstado().equals("")||incidencia.getFechaAlta()==null||
+                incidencia.getMaquina()==null){
+            log.severe("IncidencaManager:añadirIncidencia creando la incidencia");
+            throw new InsertException("Algunos campos de la incidencia no estan informados");
+        }
+        try{
+           em.persist(incidencia);
+        }catch(Exception e){
+           log.severe("IncidencaManager:añadirIncidencia: "+e.getMessage());
+           throw new InsertException(e.getMessage());
+        }
     }
 
     @Override
