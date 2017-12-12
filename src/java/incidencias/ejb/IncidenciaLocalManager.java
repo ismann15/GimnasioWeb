@@ -11,9 +11,9 @@ import incidencias.entity.Maquina;
 import incidencias.exceptions.NoIncidenciasException;
 import incidencias.exceptions.DateFormatException;
 import incidencias.exceptions.DeleteException;
+import incidencias.exceptions.IncorrectInputException;
 import incidencias.exceptions.InsertException;
 import incidencias.exceptions.NoEstadosException;
-import incidencias.exceptions.NoIdException;
 import incidencias.exceptions.NoMaquinasException;
 import incidencias.exceptions.QueryException;
 import incidencias.exceptions.UpdateException;
@@ -29,13 +29,13 @@ public interface IncidenciaLocalManager {
     
     public List<Incidencia> getAllIncidencias()throws NoIncidenciasException, QueryException;
     
-    public List<Incidencia> getFiltradasFecha(String fecha, List<Incidencia> filtro) throws DateFormatException, QueryException;
+    public List<Incidencia> getFiltradasFecha(String fecha, List<Incidencia> filtro) throws NoIncidenciasException, DateFormatException, QueryException;
     
-    public List<Incidencia> getFiltradasMaquina(String maquina, List <Incidencia> filtro) throws QueryException;
+    public List<Incidencia> getFiltradasMaquina(String maquina, List <Incidencia> filtro) throws NoIncidenciasException, QueryException;
     
-    public List<Incidencia> getFiltradasEstado (String estado, List <Incidencia> filtro) throws QueryException;
+    public List<Incidencia> getFiltradasEstado (String estado, List <Incidencia> filtro) throws NoIncidenciasException, QueryException;
     
-    public List<Incidencia> getFiltradasID(String id, List <Incidencia> filtro) throws NoIdException, QueryException;
+    public List<Incidencia> getFiltradasID(String id, List <Incidencia> filtro) throws NoIncidenciasException,IncorrectInputException, QueryException;
     
     public List<Maquina> getAllMaquinas() throws NoMaquinasException,QueryException;
     

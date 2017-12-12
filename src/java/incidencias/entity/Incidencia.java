@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 /**
  * Clase que gestiona las posibles incidencias que una
@@ -59,6 +60,7 @@ public class Incidencia implements Serializable {
     private EstadoIncidencia estado;
     private Date fechaAlta;
     private Maquina maquina;
+   
 
     /**
      * Constructor sobrecargado vacio para un objeto Incidencia, da valores null
