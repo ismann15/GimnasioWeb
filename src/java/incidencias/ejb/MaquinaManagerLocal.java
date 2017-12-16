@@ -29,12 +29,7 @@ public interface MaquinaManagerLocal {
     public List<Maquina> getMaquinaByID(String id)
             throws QueryException, IncorrectInputException;
     
-    public List<Maquina> getMaquinaByModelo(int idModelo) throws QueryException;
-    
-    public List<Maquina> getMaquinaByEstado(EstadoMaquina estado)
-            throws QueryException;
-    
-    public List<Maquina> getMaquinaByFechaUltimaRevision(String ultimaRevision)
+    public List<Maquina> getMaquinaByFiltroMultiple(int idModelo, EstadoMaquina estado, String ultimaRevision)
             throws QueryException, DateFormatException;
     
     public void crearMaquina(Maquina maquina) throws CrearMaquinaException;

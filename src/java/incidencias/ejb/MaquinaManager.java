@@ -8,11 +8,11 @@ package incidencias.ejb;
 import incidencias.entity.EstadoMaquina;
 import incidencias.entity.Maquina;
 import incidencias.exceptions.CrearMaquinaException;
-import incidencias.exceptions.DateFormatException;
 import incidencias.exceptions.EliminarMaquinaException;
 import incidencias.exceptions.IncorrectInputException;
 import incidencias.exceptions.ModificarMaquinaException;
 import incidencias.exceptions.QueryException;
+import java.sql.Date;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
@@ -71,7 +71,7 @@ public class MaquinaManager implements MaquinaManagerLocal {
     @Override
     public List<Maquina> getMaquinaByID(String id) throws QueryException, IncorrectInputException {
     
-        //Creamos una lista de objetmos maquina vacia, que se utilizará para
+        //Creamos una lista de objetos maquina vacia, que se utilizará para
         //cargar los datos y devolverlos en el return
         List <Maquina> maquinas = null;
         
@@ -103,8 +103,8 @@ public class MaquinaManager implements MaquinaManagerLocal {
         } catch (Exception e) {
             
             //Se avisa de que ha sucedido un error durante la carga de datos
-            log.info("MaquinaManager: Error cargando los datos de las maquinas"
-                    + "filtradas por ID" + e.getMessage());
+            log.severe("MaquinaManager: Error cargando los datos de las maquinas "
+                    + "filtradas por ID " + e.getMessage());
             
             //Se llama a la excepción de problemas en las busquedas
             throw new QueryException(e.getMessage());
@@ -117,20 +117,48 @@ public class MaquinaManager implements MaquinaManagerLocal {
     }
 
     @Override
-    public List<Maquina> getMaquinaByModelo(int idModelo) throws QueryException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Maquina> getMaquinaByFiltroMultiple
+        (int idModelo, EstadoMaquina estado, String ultimaRevision)
+                throws QueryException{
+        
+        //Creamos una lista de objetmos maquina vacia, que se utilizará para
+        //cargar los datos y devolverlos en el return
+        List <Maquina> maquinas = null;
+        
+        //Se avisa de que se está realizando una carga de datos filtrados
+        log.info("MaquinaManager: Se está realizando un filtrado de maquinas "
+                + "por su modelo, estado y fecha de última revisión");
+        
+        try {
+            
+            //Realizamos la carga de datos
+            maquinas = em.createNamedQuery("findMaquinasByFitroMultiple")
+                    .setParameter("modelo", estado.toString())
+                    .setParameter("modelo", idModelo)
+                    .setParameter("fecha", Date.valueOf(ultimaRevision))
+                    .getResultList();
+            
+            //Se avisa de que se ha realizado la carga de datos filtrados
+            //con exito
+            log.info("MaquinaManager: Se han cargado los datos de las maquinas");
+            
+        } catch (Exception e) {
+            
+            //Se avisa de que ha sucedido un error durante la carga de datos
+            log.severe("MaquinaManager: Error cargando los datos de las maquinas "
+                    + "filtradas por su modelo, estado y fecha de última revisión "
+                    + e.getMessage());
+            
+            //Se llama a la excepción de problemas en las busquedas
+            throw new QueryException(e.getMessage());
+            
+        }
+        
+        //Se devuelve la lista de objetos cargada con los datos
+        return maquinas;
+        
     }
-
-    @Override
-    public List<Maquina> getMaquinaByEstado(EstadoMaquina estado) throws QueryException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public List<Maquina> getMaquinaByFechaUltimaRevision(String ultimaRevision) throws QueryException, DateFormatException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     @Override
     public void crearMaquina(Maquina maquina) throws CrearMaquinaException {
         
@@ -151,7 +179,7 @@ public class MaquinaManager implements MaquinaManagerLocal {
             log.severe("MaquinaManager: Error creando una maquina"
                     + e.getMessage());
             
-            //Se llama a la incidencia de creación de maquinas
+            //Se llama a la excepción de creación de maquinas
             throw new CrearMaquinaException (e.getMessage());
             
         }

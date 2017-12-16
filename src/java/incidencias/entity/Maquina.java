@@ -39,6 +39,10 @@ import javax.persistence.NamedQuery;
     @NamedQuery(
             name="findMaquinasByID",
             query="SELECT m FROM Maquina m WHERE m.id = :id"
+    ),
+    @NamedQuery(
+            name="findMaquinasByFiltroMultiple",
+            query="Select m FROM Maquina m WHERE m.estado = :estado AND m.modelo = :modelo AND m.ultimaRevision = :fecha"
     )
 })
 public class Maquina implements Serializable {

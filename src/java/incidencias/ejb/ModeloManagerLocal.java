@@ -22,6 +22,8 @@ public interface ModeloManagerLocal {
     
     public List <Modelo> getAllModelos() throws QueryException;
     
+    public int idFromNombre (String nombre) throws QueryException;
+    
     public void crearModelo(Modelo modelo) throws CrearModeloException;
     
     public void eliminarModelo(Modelo modelo) throws EliminarModeloException;
