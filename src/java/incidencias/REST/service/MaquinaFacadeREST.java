@@ -10,6 +10,8 @@ import incidencias.ejb.MaquinaManagerLocal;
 import incidencias.ejb.ModeloManagerLocal;
 import incidencias.entity.Maquina;
 import incidencias.exceptions.CrearModeloException;
+import incidencias.exceptions.EliminarMaquinaException;
+import incidencias.exceptions.ModificarMaquinaException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -69,46 +71,106 @@ public class MaquinaFacadeREST {
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, Maquina entity) {
-        super.edit(entity);
+       
+        //Se avisa de que se está modificando una maquina
+        LOGGER.log(Level.INFO,"MaquinaManager: Se está modificando una maquina {0}",entity);
+        
+        try {
+            
+            //Modificamos una maquina
+            mml.modificarMaquina(entity);
+            
+            //Se avisa de que se ha modificado una maquina con exito
+            LOGGER.log(Level.INFO,"MaquinaManager: Se ha modificado una maquina",entity);
+            
+        } catch (Exception e) {
+            
+            //Se avisa de que ha sucedido un error cuando se modifica una maquina
+            LOGGER.log(Level.INFO,"MaquinaManager: Error modificando una maquina",e);
+            
+        }
+        
     }
 
     @DELETE
     @Path("{id}")
     public void remove(@PathParam("id") Integer id) {
-        super.remove(super.find(id));
+       
+        //Se avisa al Logger de que se está eliminando una maquina
+        LOGGER.log(Level.INFO,"MaquinaManager: Se está eliminando una maquina {0}",id);
+        
+        try {
+            
+            //Eliminamos una maquina
+            mml.eliminarMaquina(mml.getMaquinaByID(String.valueOf(id)));
+            
+            //Se avisa de que se ha eliminado una maquina con exito
+            LOGGER.log(Level.INFO,"MaquinaManager: Se ha eliminado una maquina {0}",id);
+            
+        } catch (Exception e) {
+            
+            //Se avisa de que ha sucedido un error cuando se elimina una maquina
+            LOGGER.log(Level.ALL,"MaquinaManager: Error eliminando una maquina",e);
+            
+        }
+        
     }
 
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public Maquina find(@PathParam("id") Integer id) {
-        return super.find(id);
+        
+        Maquina maquina = null;
+        
+        //Se avisa al Logger de que se está eliminando una maquina
+        LOGGER.log(Level.INFO,"MaquinaManager: Se está eliminando una maquina {0}",id);
+        
+        try {
+            
+            //Buscamos una maquina
+            maquina = mml.getMaquinaByID(String.valueOf(id));
+            
+            //Se avisa de que se ha buscado una maquina
+            LOGGER.log(Level.INFO,"MaquinaManager: Se ha eliminado una maquina {0}",id);
+            
+        } catch (Exception e) {
+            
+            //Se avisa de que ha sucedido un error cuando se buscaba una maquina
+            LOGGER.log(Level.ALL,"MaquinaManager: Error eliminando una maquina",e);
+            
+        }
+        
+        return maquina;
+        
     }
 
     @GET
-    @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     public List<Maquina> findAll() {
-        return super.findAll();
-    }
-
-    @GET
-    @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Maquina> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
-        return super.findRange(new int[]{from, to});
-    }
-
-    @GET
-    @Path("count")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String countREST() {
-        return String.valueOf(super.count());
-    }
-
-    @Override
-    protected EntityManager getEntityManager() {
-        return em;
+        
+        List <Maquina> maquinas = null;
+        
+        //Se avisa al Logger de que se está eliminando una maquina
+        LOGGER.log(Level.INFO,"MaquinaManager: Se está eliminando una maquina");
+        
+        try {
+            
+            //Buscamos una maquina
+            mml.getAllMaquinasList();
+            
+            //Se avisa de que se ha buscado maquinas
+            LOGGER.log(Level.INFO,"MaquinaManager: Se ha eliminado una maquina");
+            
+        } catch (Exception e) {
+            
+            //Se avisa de que ha sucedido un error cuando se buscaban maquinas
+            LOGGER.log(Level.ALL,"MaquinaManager: Error eliminando una maquina");
+            
+        }
+        
+        return maquinas;
+        
     }
     
 }

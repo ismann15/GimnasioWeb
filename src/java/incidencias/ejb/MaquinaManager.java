@@ -69,11 +69,11 @@ public class MaquinaManager implements MaquinaManagerLocal {
     }
 
     @Override
-    public List<Maquina> getMaquinaByID(String id) throws QueryException, IncorrectInputException {
+    public Maquina getMaquinaByID(String id) throws QueryException, IncorrectInputException {
     
         //Creamos una lista de objetos maquina vacia, que se utilizará para
         //cargar los datos y devolverlos en el return
-        List <Maquina> maquinas = null;
+        Maquina maquinas = null;
         
         //Se avisa de que se está realizando una carga de datos filtrados
         log.info("MaquinaManager: Se está realizando un filtrado de maquinas"
@@ -93,8 +93,8 @@ public class MaquinaManager implements MaquinaManagerLocal {
         try {
             
             //Realizamos la carga de datos
-            maquinas = em.createNamedQuery("findMaquinasByID")
-                    .setParameter("id", Integer.parseInt(id)).getResultList();
+            maquinas = (Maquina)em.createNamedQuery("findMaquinasByID")
+                    .setParameter("id", Integer.parseInt(id)).getSingleResult();
             
             //Se avisa de que se ha realizado la carga de datos filtrados
             //con exito

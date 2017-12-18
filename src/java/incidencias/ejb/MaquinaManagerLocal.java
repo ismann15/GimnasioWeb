@@ -26,7 +26,7 @@ public interface MaquinaManagerLocal {
     
     public List<Maquina> getAllMaquinasList() throws QueryException;
     
-    public List<Maquina> getMaquinaByID(String id)
+    public Maquina getMaquinaByID(String id)
             throws QueryException, IncorrectInputException;
     
     public List<Maquina> getMaquinaByFiltroMultiple(int idModelo, EstadoMaquina estado, String ultimaRevision)
