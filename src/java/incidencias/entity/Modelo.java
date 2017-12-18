@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Clase que gestiona los modelos que puede tener un objeto {@link incidencias.entity.Maquina}
@@ -35,6 +36,7 @@ import javax.persistence.NamedQuery;
             query="SELECT m.id FROM Modelo m WHERE m.nombre = :nombre"
     )
 })
+@XmlRootElement
 public class Modelo implements Serializable {
     
     private static final long serialVersionUID = 1L;

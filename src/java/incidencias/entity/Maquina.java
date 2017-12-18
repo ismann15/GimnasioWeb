@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Clase que gestiona maquinas, estos son sus atributos
@@ -42,9 +43,10 @@ import javax.persistence.NamedQuery;
     ),
     @NamedQuery(
             name="findMaquinasByFiltroMultiple",
-            query="Select m FROM Maquina m WHERE m.estado = :estado AND m.modelo = :modelo AND m.ultimaRevision = :fecha"
+            query="Select m FROM Maquina m WHERE m.estado = :estado AND m.modelo = :modelo AND m.fechaUltimaRevision  = :fecha"
     )
 })
+@XmlRootElement
 public class Maquina implements Serializable {
 
     private static final long serialVersionUID = 1L;
