@@ -13,7 +13,6 @@ import incidencias.exceptions.EliminarMaquinaException;
 import incidencias.exceptions.IncorrectInputException;
 import incidencias.exceptions.ModificarMaquinaException;
 import incidencias.exceptions.QueryException;
-import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 

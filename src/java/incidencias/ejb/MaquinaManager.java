@@ -79,6 +79,29 @@ public class MaquinaManager implements MaquinaManagerLocal {
         log.info("MaquinaManager: Se está realizando un filtrado de maquinas"
                 + "por su ID");
 
+        try {
+            
+            if (!(Integer.parseInt(id) > -1)) {
+            
+            //Se avisa de que ha sucedido un error porque el input es incorrecto
+            log.severe("MaquinaManager: El dato introducido no es un numero"
+                    + " positivo");
+            
+            //Se llama a la excepcion de problemas con el input
+            throw new IncorrectInputException("El dato no es un numero positivo");
+            
+            }
+            
+        } catch (Exception e) {
+            
+            //Se avisa de que ha sucedido un error porque el input es incorrecto
+            log.severe("MaquinaManager: El dato introducido no es un numero");
+            
+            //Se llama a la excepcion de problemas con el input
+            throw new IncorrectInputException("El dato no es un numero");
+            
+        }
+        
         if (!(Integer.parseInt(id) > -1)) {
             
             //Se avisa de que ha sucedido un error porque el input es incorrecto

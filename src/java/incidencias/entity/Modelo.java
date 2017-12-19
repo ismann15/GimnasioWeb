@@ -34,6 +34,10 @@ import javax.xml.bind.annotation.XmlRootElement;
             query="SELECT m FROM Modelo m ORDER BY m.id"
     ),
     @NamedQuery(
+            name="findModeloByID",
+            query="SELECT m FROM Modelo m WHERE m.id = :id"
+    ),
+    @NamedQuery(
             name="findIDByNombre",
             query="SELECT m.id FROM Modelo m WHERE m.nombre = :nombre"
     )

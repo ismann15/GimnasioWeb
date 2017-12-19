@@ -8,6 +8,7 @@ package incidencias.ejb;
 import incidencias.entity.Modelo;
 import incidencias.exceptions.CrearModeloException;
 import incidencias.exceptions.EliminarModeloException;
+import incidencias.exceptions.IncorrectInputException;
 import incidencias.exceptions.ModificarModeloException;
 import incidencias.exceptions.QueryException;
 import java.util.List;
@@ -21,6 +22,8 @@ import javax.ejb.Local;
 public interface ModeloManagerLocal {
     
     public List <Modelo> getAllModelos() throws QueryException;
+    
+    public Modelo getModeloByID(String id) throws QueryException,IncorrectInputException;
     
     public int idFromNombre (String nombre) throws QueryException;
     

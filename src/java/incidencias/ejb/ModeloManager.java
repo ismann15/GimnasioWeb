@@ -5,9 +5,11 @@
  */
 package incidencias.ejb;
 
+import incidencias.entity.Maquina;
 import incidencias.entity.Modelo;
 import incidencias.exceptions.CrearModeloException;
 import incidencias.exceptions.EliminarModeloException;
+import incidencias.exceptions.IncorrectInputException;
 import incidencias.exceptions.ModificarModeloException;
 import incidencias.exceptions.QueryException;
 import java.util.List;
@@ -133,8 +135,8 @@ public class ModeloManager implements ModeloManagerLocal {
     @Override
     public void eliminarModelo(Modelo modelo) throws EliminarModeloException {
         
-      //Se avisa de que se está eliminando un modelo
-        log.info("ModeloManager: Se está creando un modelo");
+        //Se avisa de que se está eliminando un modelo
+        log.info("ModeloManager: Se está eliminando un modelo");
         
         try {
             
@@ -160,7 +162,7 @@ public class ModeloManager implements ModeloManagerLocal {
     @Override
     public void modificarModelo(Modelo modelo) throws ModificarModeloException {
      
-    //Se avisa de que se está modificando un modelo
+        //Se avisa de que se está modificando un modelo
         log.info("ModeloManager: Se está modificando un modelo");
         
         try {
@@ -182,6 +184,67 @@ public class ModeloManager implements ModeloManagerLocal {
             
         }
         
+    }
+
+    @Override
+    public Modelo getModeloByID(String id) throws QueryException,IncorrectInputException {
+    
+        //Creamos una objeto modelo vacio, que se utilizará para
+        //cargar los datos y devolverlos en el return
+        Modelo modelos = null;
+
+        //Se avisa de que se está realizando una carga de datos
+        log.info("ModeloManager: Se está realizando un filtrado de los modelos"
+                + "por su id");
+
+        try {
+                       
+            if (!(Integer.parseInt(id) > -1)) {
+            
+            //Se avisa de que ha sucedido un error porque el input es incorrecto
+            log.severe("MaquinaManager: El dato introducido no es un numero"
+                    + " positivo");
+            
+            //Se llama a la excepcion de problemas con el input
+            throw new IncorrectInputException("El dato no es un numero positivo");
+            
+            }
+            
+        } catch (Exception e) {
+            
+            //Se avisa de que ha sucedido un error porque el input es incorrecto
+            log.severe("MaquinaManager: El dato introducido no es un número");
+            
+            //Se llama a la excepcion de problemas con el input
+            throw new IncorrectInputException("El dato no es un numero");
+            
+        }
+        
+        try {
+
+            //Realizamos la carga de datos
+            modelos = (Modelo)em.createNamedQuery("findModeloByID")
+                            .setParameter("id", Integer.parseInt(id))
+                            .getSingleResult();
+
+            //Se avisa de que se ha realizado la carga de datos
+            log.info("ModeloManager: Se han cargado los datos de los modelos"
+                    + "filtrados por su id");
+
+        } catch (Exception e) {
+
+            //Se avisa de que ha sucedido un error durante la carga de datos
+            log.severe("ModeloManager: Error cargando los datos de los modelos"
+                    + "filtrados por su id " + e.getMessage());
+
+            //Se llama a lla excepción de problemas en las busquedas
+            throw new QueryException(e.getMessage());
+
+        }
+
+        //Se devuelve la lista de objetos modelo cargada con los datos de todos los modelos
+        return modelos;
+    
     }
   
 }
