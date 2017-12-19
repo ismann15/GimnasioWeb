@@ -35,7 +35,7 @@ public interface IncidenciaLocalManager {
     
     public List<Incidencia> getFiltradasEstado (String estado, List <Incidencia> filtro) throws NoIncidenciasException, QueryException;
     
-    public List<Incidencia> getFiltradasID(String id, List <Incidencia> filtro) throws NoIncidenciasException,IncorrectInputException, QueryException;
+    public Incidencia getFiltradasID(String id) throws NoIncidenciasException,IncorrectInputException, QueryException;
     
     public List<Maquina> getAllMaquinas() throws NoMaquinasException,QueryException;
     

@@ -6,13 +6,16 @@
 package incidencias.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Clase que gestiona los modelos que puede tener un objeto {@link incidencias.entity.Maquina}
@@ -26,15 +29,22 @@ import javax.persistence.Table;
  * @author isma
  */
 @Entity
-@Table(name="",schema="")
+@Table(name="modelo",schema="dindb")
 @NamedQueries({
     @NamedQuery(
-           name="findAllModelos",
-           query="SELECT m FROM Modelo m ORDER BY m.id"),
+            name="findAllModelos",
+            query="SELECT m FROM Modelo m ORDER BY m.id"
+    ),
     @NamedQuery(
-            name="findModeloById",
-            query="SELECT m FROM Modelo m  WHERE m.id= :id")
+            name="findModeloByID",
+            query="SELECT m FROM Modelo m WHERE m.id = :id"
+    ),
+    @NamedQuery(
+            name="findIDByNombre",
+            query="SELECT m.id FROM Modelo m WHERE m.nombre = :nombre"
+    )
 })
+@XmlRootElement
 public class Modelo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,11 +53,12 @@ public class Modelo implements Serializable {
     private Integer id;
     private String nombre;
     private String modoEmpleo;
+    @OneToMany(mappedBy ="modelo")
+    private Collection<Maquina> maquinas;
     
     /**Constructor sobrecargado vacio para un objeto Modelo, da valores null a todos los atributos*/
     public Modelo(){
-        this.nombre=null;
-        this.modoEmpleo=null;
+        
     }
     /**Constructor sobrecargado que recibe los valores de nombre y modoEmpleo
      * @param nombre es el nombre del modelo
@@ -58,6 +69,16 @@ public class Modelo implements Serializable {
         this.modoEmpleo=modoEmpleo;
     }
 
+    public Collection<Maquina> getMaquinas() {
+        return maquinas;
+    }
+
+    public void setMaquinas(Collection<Maquina> maquinas) {
+        this.maquinas = maquinas;
+    }
+
+    
+    
     public String getNombre() {
         return nombre;
     }

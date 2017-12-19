@@ -11,10 +11,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Clase que gestiona las posibles incidencias que una
@@ -33,33 +34,39 @@ import javax.persistence.Temporal;
  * @author isma
  */
 @Entity
-@Table(name="",schema="")
+@Table(name="incidencia",schema="dindb")
 @NamedQueries({
     @NamedQuery(
            name="findAllIncidencias",
            query="SELECT i FROM Incidencia i ORDER BY i.fechaAlta"),
     @NamedQuery(
             name="findIncidenciaById",
-            query="SELECT i FROM Inciencia i WHERE i.id= :id"),
+            query="SELECT i FROM Incidencia i WHERE i.id= :id"),
     @NamedQuery(
             name="findIncidenciaByEstado",
-            query="SELECT i FROM Inciencia i WHERE i.estado= :estado"),
+            query="SELECT i FROM Incidencia i WHERE i.estado= :estado"),
     @NamedQuery(
             name="findIncidenciaByFechaAlta",
-            query="SELECT i FROM Inciencia i WHERE i.fechaAlta= :fachaAlta"),
+            query="SELECT i FROM Incidencia i WHERE i.fechaAlta= :fachaAlta"),
     @NamedQuery(
             name="findIncidenciaByMaquina",
-            query="SELECT i FROM Inciencia i WHERE i.maquina= :maquina"),
+            query="SELECT i FROM Incidencia i WHERE i.maquina= :maquina"),
+    @NamedQuery(
+            name="findAllMaquinas",
+            query="SELECT m FROM Maquina m"),
 })
+@XmlRootElement
 public class Incidencia implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @ManyToOne
+    private Maquina maquina;
     private EstadoIncidencia estado;
     private Date fechaAlta;
-    private Maquina maquina;
+    
    
 
     /**
@@ -67,9 +74,6 @@ public class Incidencia implements Serializable {
      * a todos los atributos
      */
     public Incidencia() {
-        this.estado = null;
-        this.fechaAlta = null;
-        this.maquina = null;
     }
 
     /**

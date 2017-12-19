@@ -5,11 +5,13 @@
  */
 package incidencias.entity;
 
+import java.io.Serializable;
+
 /**
  * Clase que gestiona los posibles estados  que una {@link incidencias.entity.Incidencia} puede estar.
  * @author isma
  */
-public enum EstadoIncidencia {
+public enum EstadoIncidencia{
     /**
      * incidencia resuleta 
      */
