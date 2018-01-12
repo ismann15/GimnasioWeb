@@ -40,7 +40,7 @@ public class ModeloFacadeREST{
     public void create(Modelo entity) {
         
         //Se avisa de que se está creando un modelo
-        LOGGER.log(Level.INFO,"ModeloManager: Se está creando un modelo {0}",entity);
+        LOGGER.log(Level.INFO,"ModeloREST: Se está creando un modelo {0}",entity);
         
         try {
             
@@ -48,12 +48,12 @@ public class ModeloFacadeREST{
             mml.crearModelo(entity);
             
             //Se avisa de que se ha creado un modelo con éxito
-            LOGGER.log(Level.INFO,"ModeloManager: Se ha creado un modelo {0}",entity);
+            LOGGER.log(Level.INFO,"ModeloREST: Se ha creado un modelo {0}",entity);
             
         } catch (Exception e) {
             
             //Se avisa de que ha sucedido un error cuando se crea un modelo
-            LOGGER.log(Level.SEVERE,"ModeloManager: Error creando un modelo",e);
+            LOGGER.log(Level.SEVERE,"ModeloREST: Error creando un modelo",e);
             
         }
         
@@ -65,7 +65,7 @@ public class ModeloFacadeREST{
     public void edit(@PathParam("id") Integer id, Modelo entity) {
 
         //Se avisa de que se está modificando un modelo
-        LOGGER.log(Level.INFO,"ModeloManager: Se está modificando un modelo {0}",entity);
+        LOGGER.log(Level.INFO,"ModeloREST: Se está modificando un modelo {0}",entity);
         
         try {
             
@@ -73,12 +73,12 @@ public class ModeloFacadeREST{
             mml.modificarModelo(entity);
             
             //Se avisa de que se ha modificado un modelo con éxito
-            LOGGER.log(Level.INFO,"ModeloManager: Se ha modificado un modelo {0}",entity);
+            LOGGER.log(Level.INFO,"ModeloREST: Se ha modificado un modelo {0}",entity);
             
         } catch (Exception e) {
             
             //Se avisa de que ha sucedido un error cuando se modifica un modelo
-            LOGGER.log(Level.SEVERE,"ModeloManager: Error modificando un modelo {0}",entity);
+            LOGGER.log(Level.SEVERE,"ModeloREST: Error modificando un modelo {0}",entity);
         }
     
     }
@@ -88,7 +88,7 @@ public class ModeloFacadeREST{
     public void remove(@PathParam("id") Integer id) {
     
         //Se avisa de que se está eliminando un modelo
-        LOGGER.log(Level.INFO,"ModeloManager: Se está eliminando un modelo");
+        LOGGER.log(Level.INFO,"ModeloREST: Se está eliminando un modelo");
         
         try {
             
@@ -96,12 +96,12 @@ public class ModeloFacadeREST{
             mml.eliminarModelo(mml.getModeloByID(String.valueOf(id)));
             
             //Se avisa de que se ha eliminado un modelo con éxito
-            LOGGER.log(Level.INFO,"ModeloManager: Se ha eliminado un modelo");
+            LOGGER.log(Level.INFO,"ModeloREST: Se ha eliminado un modelo");
             
         } catch (Exception e) {
             
             //Se avisa de que ha sucedido un error cuando se elimina un modelo
-            LOGGER.log(Level.SEVERE,"ModeloManager: Error eliminando un modelo ",e);
+            LOGGER.log(Level.SEVERE,"ModeloREST: Error eliminando un modelo ",e);
             
         }  
     
@@ -115,7 +115,7 @@ public class ModeloFacadeREST{
         Modelo modelo = null;
         
         //Se avisa de que se está realizando una carga de datos
-        LOGGER.log(Level.INFO,"ModeloManager: Se está realizando un filtrado de"
+        LOGGER.log(Level.INFO,"ModeloREST: Se está realizando un filtrado de"
                 + "los modelos por su id");
 
         try {
@@ -124,13 +124,13 @@ public class ModeloFacadeREST{
             modelo = mml.getModeloByID(String.valueOf(id));
 
             //Se avisa de que se ha realizado la carga de datos
-            LOGGER.log(Level.INFO,"ModeloManager: Se han cargado los datos de"
+            LOGGER.log(Level.INFO,"ModeloREST: Se han cargado los datos de"
                     + "los modelos filtrados por su id");
 
         } catch (Exception e) {
 
             //Se avisa de que ha sucedido un error durante la carga de datos
-            LOGGER.log(Level.SEVERE,"ModeloManager: Error cargando los datos de"
+            LOGGER.log(Level.SEVERE,"ModeloREST: Error cargando los datos de"
                     + "los modelos filtrados por su id ",e);
 
         }
@@ -149,7 +149,7 @@ public class ModeloFacadeREST{
         List<Modelo> modelos = null;
 
         //Se avisa de que se está realizando una carga de datos
-        LOGGER.log(Level.INFO,"ModeloManager: Se están cargando los modelos");
+        LOGGER.log(Level.INFO,"ModeloREST: Se están cargando los modelos");
 
         try {
 
@@ -157,12 +157,12 @@ public class ModeloFacadeREST{
             modelos = mml.getAllModelos();
 
             //Se avisa de que se ha realizado la carga de datos
-            LOGGER.log(Level.INFO,"ModeloManager: Se han cargado los datos de los modelos");
+            LOGGER.log(Level.INFO,"ModeloREST: Se han cargado los datos de los modelos");
 
         } catch (Exception e) {
 
             //Se avisa de que ha sucedido un error durante la carga de datos
-            LOGGER.log(Level.SEVERE,"ModeloManager: Error cargando los datos de"
+            LOGGER.log(Level.SEVERE,"ModeloREST: Error cargando los datos de"
                     + "los modelos",e);
 
         }

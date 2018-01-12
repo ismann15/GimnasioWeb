@@ -38,7 +38,7 @@ public class ModeloManager implements ModeloManagerLocal {
     
     //Creamos una lista de objetos modelo vacia, que se utilizará para
     //cargar los datos y devolverlos en el return
-    List<Modelo> modelos = null;
+    List<Modelo> modelos;
     
     //Se avisa de que se está realizando una carga de datos
     log.info("ModeloManager: Se están cargando los modelos");

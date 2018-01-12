@@ -11,7 +11,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Clase que gestiona las posibles incidencias que una
@@ -30,25 +34,43 @@ import javax.persistence.Table;
  * @author isma
  */
 @Entity
-@Table(name="Incidencia",schema="dindb")
+@Table(name="incidencia",schema="dindb")
+@NamedQueries({
+    @NamedQuery(
+           name="findAllIncidencias",
+           query="SELECT i FROM Incidencia i ORDER BY i.fechaAlta"),
+    @NamedQuery(
+            name="findIncidenciaById",
+            query="SELECT i FROM Incidencia i WHERE i.id= :id"),
+    @NamedQuery(
+            name="findIncidenciaByEstado",
+            query="SELECT i FROM Incidencia i WHERE i.estado= :estado"),
+    @NamedQuery(
+            name="findIncidenciaByFechaAlta",
+            query="SELECT i FROM Incidencia i WHERE i.fechaAlta= :fachaAlta"),
+    @NamedQuery(
+            name="findIncidenciaByMaquina",
+            query="SELECT i FROM Incidencia i WHERE i.maquina= :maquina")
+})
+@XmlRootElement
 public class Incidencia implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @ManyToOne
+    private Maquina maquina;
     private EstadoIncidencia estado;
     private Date fechaAlta;
-    private Maquina maquina;
+    
+   
 
     /**
      * Constructor sobrecargado vacio para un objeto Incidencia, da valores null
      * a todos los atributos
      */
     public Incidencia() {
-        this.estado = null;
-        this.fechaAlta = null;
-        this.maquina = null;
     }
 
     /**

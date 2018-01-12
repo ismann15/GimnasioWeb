@@ -6,6 +6,7 @@
 package incidencias.REST.service;
 
 import incidencias.ejb.MaquinaManager;
+import incidencias.ejb.MaquinaManagerLocal;
 import incidencias.entity.Maquina;
 import java.util.List;
 import java.util.logging.Level;
@@ -30,7 +31,7 @@ public class MaquinaFacadeREST {
 
     private static final Logger LOGGER = Logger.getLogger("incidencias.REST.ModeloREST");
     @EJB
-    private MaquinaManager mml;
+    private MaquinaManagerLocal mml;
 
     @POST
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
@@ -112,7 +113,7 @@ public class MaquinaFacadeREST {
         Maquina maquina = null;
         
         //Se avisa al Logger de que se está eliminando una maquina
-        LOGGER.log(Level.INFO,"MaquinaREST: Se está eliminando una maquina {0}",id);
+        LOGGER.log(Level.INFO,"MaquinaREST: Se está buscando una maquina {0}",id);
         
         try {
             
@@ -120,12 +121,12 @@ public class MaquinaFacadeREST {
             maquina = mml.getMaquinaByID(String.valueOf(id));
             
             //Se avisa de que se ha buscado una maquina
-            LOGGER.log(Level.INFO,"MaquinaREST: Se ha eliminado una maquina {0}",id);
+            LOGGER.log(Level.INFO,"MaquinaREST: Se ha encontrado una maquina {0}",id);
             
         } catch (Exception e) {
             
             //Se avisa de que ha sucedido un error cuando se buscaba una maquina
-            LOGGER.log(Level.ALL,"MaquinaREST: Error eliminando una maquina",e);
+            LOGGER.log(Level.ALL,"MaquinaREST: Error buscando una maquina",e);
             
         }
         
@@ -140,7 +141,7 @@ public class MaquinaFacadeREST {
         List <Maquina> maquinas = null;
         
         //Se avisa al Logger de que se está eliminando una maquina
-        LOGGER.log(Level.INFO,"MaquinaREST: Se está eliminando una maquina");
+        LOGGER.log(Level.INFO,"MaquinaREST: Se están buscando las maquians");
         
         try {
             
@@ -148,12 +149,12 @@ public class MaquinaFacadeREST {
             mml.getAllMaquinasList();
             
             //Se avisa de que se ha buscado maquinas
-            LOGGER.log(Level.INFO,"MaquinaREST: Se ha eliminado una maquina");
+            LOGGER.log(Level.INFO,"MaquinaREST: Se han cargados las maquinas");
             
         } catch (Exception e) {
             
             //Se avisa de que ha sucedido un error cuando se buscaban maquinas
-            LOGGER.log(Level.ALL,"MaquinaREST: Error eliminando una maquina");
+            LOGGER.log(Level.ALL,"MaquinaREST: Error cargando las maquinas");
             
         }
         

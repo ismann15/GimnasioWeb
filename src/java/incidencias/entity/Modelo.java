@@ -6,12 +6,14 @@
 package incidencias.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -44,18 +46,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 })
 @XmlRootElement
 public class Modelo implements Serializable {
-    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String nombre;
     private String modoEmpleo;
+    @OneToMany(mappedBy ="modelo")
+    private Collection<Maquina> maquinas;
     
     /**Constructor sobrecargado vacio para un objeto Modelo, da valores null a todos los atributos*/
     public Modelo(){
-        this.nombre=null;
-        this.modoEmpleo=null;
+        
     }
     /**Constructor sobrecargado que recibe los valores de nombre y modoEmpleo
      * @param nombre es el nombre del modelo
@@ -66,6 +69,16 @@ public class Modelo implements Serializable {
         this.modoEmpleo=modoEmpleo;
     }
 
+    public Collection<Maquina> getMaquinas() {
+        return maquinas;
+    }
+
+    public void setMaquinas(Collection<Maquina> maquinas) {
+        this.maquinas = maquinas;
+    }
+
+    
+    
     public String getNombre() {
         return nombre;
     }

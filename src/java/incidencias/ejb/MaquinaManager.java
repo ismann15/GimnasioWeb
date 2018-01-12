@@ -39,7 +39,7 @@ public class MaquinaManager implements MaquinaManagerLocal {
     
         //Creamos una lista de objetos maquina vacia, que se utilizará para
         //cargar los datos y devolverlos en el return
-        List<Maquina> maquinas = null;
+        List<Maquina> maquinas;
         
         //Se avisa de que se está realizando una carga de datos
         log.info("MaquinaManager: Se están cargando las maquinas");
@@ -73,7 +73,7 @@ public class MaquinaManager implements MaquinaManagerLocal {
     
         //Creamos una lista de objetos maquina vacia, que se utilizará para
         //cargar los datos y devolverlos en el return
-        Maquina maquinas = null;
+        Maquina maquinas;
         
         //Se avisa de que se está realizando una carga de datos filtrados
         log.info("MaquinaManager: Se está realizando un filtrado de maquinas"
@@ -146,7 +146,7 @@ public class MaquinaManager implements MaquinaManagerLocal {
         
         //Creamos una lista de objetmos maquina vacia, que se utilizará para
         //cargar los datos y devolverlos en el return
-        List <Maquina> maquinas = null;
+        List <Maquina> maquinas;
         
         //Se avisa de que se está realizando una carga de datos filtrados
         log.info("MaquinaManager: Se está realizando un filtrado de maquinas "

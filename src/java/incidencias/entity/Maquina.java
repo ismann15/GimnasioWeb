@@ -6,13 +6,17 @@
 package incidencias.entity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -58,17 +62,16 @@ public class Maquina implements Serializable {
     private EstadoMaquina estado;
     private Date fechaUltimaRevision;
     private Date fechaProximaRevision;
+    @ManyToOne
     private Modelo modelo;
+    @OneToMany(mappedBy="maquina")
+    private Collection<Incidencia> incidencias;
 
     /**
      * Constructor sobrecargado vacio para un objeto de tipo Maquina, pone valor
      * null a todos los atributos
      */
     public Maquina() {
-        this.estado = null;
-        this.fechaProximaRevision = null;
-        this.fechaUltimaRevision = null;
-        this.modelo = null;
     }
 
     /**
@@ -90,6 +93,16 @@ public class Maquina implements Serializable {
         this.fechaProximaRevision = fechaProximaRevision;
         this.modelo = modelo;
     }
+
+    public Collection<Incidencia> getIncidencias() {
+        return incidencias;
+    }
+
+    public void setIncidencias(Collection<Incidencia> incidencias) {
+        this.incidencias = incidencias;
+    }
+    
+    
 
     public EstadoMaquina getEstado() {
         return estado;
