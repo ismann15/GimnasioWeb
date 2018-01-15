@@ -53,8 +53,8 @@ public class Modelo implements Serializable {
     private Integer id;
     private String nombre;
     private String modoEmpleo;
-    @OneToMany(mappedBy ="modelo")
-    private Collection<Maquina> maquinas;
+    //@OneToMany(mappedBy ="modelo")
+    //private Collection<Maquina> maquinas;
     
     /**Constructor sobrecargado vacio para un objeto Modelo, da valores null a todos los atributos*/
     public Modelo(){
@@ -69,13 +69,13 @@ public class Modelo implements Serializable {
         this.modoEmpleo=modoEmpleo;
     }
 
-    public Collection<Maquina> getMaquinas() {
+    /*public Collection<Maquina> getMaquinas() {
         return maquinas;
     }
 
     public void setMaquinas(Collection<Maquina> maquinas) {
         this.maquinas = maquinas;
-    }
+    }*/
 
     
     

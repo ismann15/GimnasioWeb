@@ -39,7 +39,7 @@ public class MaquinaManager implements MaquinaManagerLocal {
     
         //Creamos una lista de objetos maquina vacia, que se utilizará para
         //cargar los datos y devolverlos en el return
-        List<Maquina> maquinas;
+        List<Maquina> maquinas = null;
         
         //Se avisa de que se está realizando una carga de datos
         log.info("MaquinaManager: Se están cargando las maquinas");
@@ -217,6 +217,8 @@ public class MaquinaManager implements MaquinaManagerLocal {
         
         try {
             
+            maquina = em.merge(maquina);
+            
             //Eliminamos una maquina
             em.remove(maquina);
             
@@ -244,8 +246,8 @@ public class MaquinaManager implements MaquinaManagerLocal {
         
         try {
             
-            //Modificamos una maquina
-            em.refresh(maquina);
+            if (!em.contains(maquina))
+                em.merge(maquina);
             
             //Se avisa de que se ha modificado una maquina con exito
             log.info("MaquinaManager: Se ha modificado una maquina");

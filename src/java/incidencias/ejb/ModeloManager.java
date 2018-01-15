@@ -140,6 +140,8 @@ public class ModeloManager implements ModeloManagerLocal {
         
         try {
             
+            modelo = em.merge(modelo);
+            
             //Eliminamos un modelo
             em.remove(modelo);
             
@@ -167,8 +169,8 @@ public class ModeloManager implements ModeloManagerLocal {
         
         try {
             
-            //Modificamos un modelo
-            em.refresh(modelo);
+            if(!em.contains(modelo))
+                em.merge(modelo);
             
             //Se avisa de que se ha modificado un modelo con éxito
             log.info("ModeloManager: Se ha modificado un modelo");

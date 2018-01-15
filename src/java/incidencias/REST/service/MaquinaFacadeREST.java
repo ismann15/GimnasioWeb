@@ -146,7 +146,7 @@ public class MaquinaFacadeREST {
         try {
             
             //Buscamos una maquina
-            mml.getAllMaquinasList();
+            maquinas = mml.getAllMaquinasList();
             
             //Se avisa de que se ha buscado maquinas
             LOGGER.log(Level.INFO,"MaquinaREST: Se han cargados las maquinas");

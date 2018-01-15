@@ -64,8 +64,8 @@ public class Maquina implements Serializable {
     private Date fechaProximaRevision;
     @ManyToOne
     private Modelo modelo;
-    @OneToMany(mappedBy="maquina")
-    private Collection<Incidencia> incidencias;
+    //@OneToMany(mappedBy="maquina")
+    //private Collection<Incidencia> incidencias;
 
     /**
      * Constructor sobrecargado vacio para un objeto de tipo Maquina, pone valor
@@ -94,13 +94,13 @@ public class Maquina implements Serializable {
         this.modelo = modelo;
     }
 
-    public Collection<Incidencia> getIncidencias() {
+    /*public Collection<Incidencia> getIncidencias() {
         return incidencias;
     }
 
     public void setIncidencias(Collection<Incidencia> incidencias) {
         this.incidencias = incidencias;
-    }
+    }*/
     
     
 
